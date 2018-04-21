@@ -9,4 +9,25 @@ in vscode settings;
         "--load-plugins=pylint_django"
     ],
 ```
+# migrating DB tables:
+```
+python3 manage.py migrate
+ 
+```
 
+# playing with tables in shell
+```
+python3 manage.py shell
+from processor.models import PdfPack
+>>> from processor.models import PdfPack
+>>> pack = PdfPack(desc="hello", document=NULL)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'NULL' is not defined
+>>> pack = PdfPack(desc="hello")
+>>> pack.desc 
+>>> hello
+>>> pack.desc = "woof"
+>>> pack.save() # stores in DB
+
+```
