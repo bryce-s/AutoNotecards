@@ -25,6 +25,7 @@ urlpatterns = [
     # url(regex, view function, kwargs (not often used).., (url)name )
     url(r'^$', views.home, name='home'),
     url(r'^signup/$', accounts_views.signup, name='signup'),
+    url(r'^pdf/(?P<pk>\d+)/new/$', views.new_pdf, name='new_pdf'),
     # url(r'^about/$', views.about, name='about'), # an about view.
     path('admin/', admin.site.urls),
 ]

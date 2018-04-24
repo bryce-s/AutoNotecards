@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload a New PDF{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">PDFs</a></li>
+  <li class="breadcrumb-item active">New PDF</li>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload</button>
+     </form>
+        <div class="form-group">
+            <label for="id_desc">Description:</label>
+            <input type="text" class="form-control" id="id_desc" name="desc">
+        </div>
+{% endblock %}
