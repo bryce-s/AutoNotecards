@@ -1,20 +1,33 @@
-<!DOCTYPE html> {% load static %}
+{% extends 'base.html' %} <!DOCTYPE html> 
+{% load static %}
 <!--remember to use when we refer to css, js, images-->
-<html>
 
-<head>
-    <meta charset="utf-8">
-    <!--returns the boostrap file-->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <title>User Pdfs</title>
-</head>
 
-<body>
-    <div class="well">
-        <h1>User Pdfs:</h1>
-        {% for pdf in PdfPacks %} {{ pdf.desc }} <br> {% endfor %}
-        <b>Hello, this is some lopus ipsum</b>
-    </div>
-</body>
+{% block breadcrumb %}
+<li class="breadcrumb-item active">Upload</li>
+{% endblock %} 
 
-</html>
+{% block content %}
+<table class="table">
+    <thead class="thead-inverse">
+        <tr>
+            <th>File</th>
+            <th>Upload Time</th>
+            <th>Creator</th>
+        </tr>
+    </thead>
+    <tbody >
+        <a>Your Uploads:</a>
+        {% for PdfPack in PdfPacks %}
+        <tr>
+            <td>
+                <a href="#">{{ PdfPack.desc }}</a>
+            </td>
+            <td class="align-middle">{{ PdfPack.uploadTime }}</td>
+            <td class="align-middle">{{ PdfPack.created_by }}</td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

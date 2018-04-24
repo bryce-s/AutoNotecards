@@ -18,9 +18,13 @@ from django.urls import path
 from django.conf.urls import url
 
 from processor import views
+from accounts import views as accounts_views
 
 
 urlpatterns = [
+    # url(regex, view function, kwargs (not often used).., (url)name )
     url(r'^$', views.home, name='home'),
+    url(r'^signup/$', accounts_views.signup, name='signup'),
+    # url(r'^about/$', views.about, name='about'), # an about view.
     path('admin/', admin.site.urls),
 ]
