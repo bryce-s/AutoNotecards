@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import PdfPack
 
-# Register your models here.
+admin.site.register(PdfPack)

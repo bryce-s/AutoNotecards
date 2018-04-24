@@ -9,4 +9,3 @@ class PdfPack(models.Model):
     uploadTime = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     # note; upload time will upload to $media_root/documents/YYYY/MM/DD
-    

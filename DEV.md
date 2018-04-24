@@ -31,3 +31,10 @@ NameError: name 'NULL' is not defined
 >>> pack.save() # stores in DB
 
 ```
+
+# Testing:
+```
+python3 manage.py test processor
+# with verbosity:
+python3 manage.py test processor --verbosity=2 
+```

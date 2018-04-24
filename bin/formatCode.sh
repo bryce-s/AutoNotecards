@@ -3,6 +3,7 @@ set -x
 # npm -g install js-beautify (for js and html..)
 autopep8 --in-place --aggressive --aggressive autonotecards/autonotecards/*.py
 autopep8 --in-place --aggressive --aggressive autonotecards/processor/*.py
+js-beautify -r autonotecards/templates/*.html
 # recurse through dir applying formatters
 for f in autonotecards/*;
   do 
