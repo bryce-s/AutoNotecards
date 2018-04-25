@@ -1,13 +1,11 @@
-{% extends 'base.html' %} <!DOCTYPE html> 
-{% load static %}
+{% extends 'base.html' %}
+<!DOCTYPE html> {% load static %}
 <!--remember to use when we refer to css, js, images-->
 
 
 {% block breadcrumb %}
 <li class="breadcrumb-item active">Upload</li>
-{% endblock %} 
-
-{% block content %}
+{% endblock %} {% block content %}
 <table class="table">
     <thead class="thead-inverse">
         <tr>
@@ -16,9 +14,8 @@
             <th>Creator</th>
         </tr>
     </thead>
-    <tbody >
-        <a>Your Uploads:</a>
-        {% for PdfPack in PdfPacks %}
+    <tbody>
+        <a>Your Uploads:</a> {% for PdfPack in PdfPacks %}
         <tr>
             <td>
                 <a href="#">{{ PdfPack.desc }}</a>
