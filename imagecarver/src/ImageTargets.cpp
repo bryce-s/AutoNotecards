@@ -58,3 +58,11 @@ void ImageTargets::push(const int pageNumber, const int xCoord, const int yCoord
     });
     vertices.insert(lb, referenceVertex);
 }
+
+PageVertex &ImageTargets::front() {
+    return vertices.front();
+}
+
+PageVertex &ImageTargets::back() {
+    return vertices.back();
+}
