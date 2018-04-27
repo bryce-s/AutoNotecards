@@ -8,6 +8,7 @@
 #include <iostream>
 #include <algorithm>
 #include <iterator>
+#include <ostream>
 
 using json = nlohmann::json ;
 
@@ -17,29 +18,17 @@ class ImageTargets {
 
     void processArray(json& j);
 
-    void push(const int pageNumber, const int xCoord, const int yCoord);
 
-    class TargetIterator {
-    public:
-        typedef std::forward_iterator_tag iterator_category;
-        typedef PageVertex value_type;
-        typedef ptrdiff_t difference_type;
-        typedef PageVertex* pointer;
-        typedef PageVertex& reference;
-        TargetIterator();
-        PageVertex& operator*();
-        PageVertex* operator->();
-        TargetIterator& operator++();
-        TargetIterator operator++(const int amount);
-    private:
-        size_t activeIndex;
-        friend class ImageTargets;
 
-    };
+
 
 
 public:
     void processJSON(std::string jsonFilename);
+
+    void push(const int pageNumber, const int xCoord, const int yCoord);
+
+    void print(std::ostream& out);
 
     const size_t size();
 
@@ -48,25 +37,9 @@ public:
     PageVertex& front();
     PageVertex& back();
 
+    std::vector<PageVertex>::iterator begin();
+    std::vector<PageVertex>::iterator end();
+
 };
 
-ImageTargets::TargetIterator::TargetIterator() {
-
-}
-
-PageVertex &ImageTargets::TargetIterator::operator*() {
-    return <#initializer#>;
-}
-
-PageVertex *ImageTargets::TargetIterator::operator->() {
-    return nullptr;
-}
-
-ImageTargets::TargetIterator &ImageTargets::TargetIterator::operator++() {
-    return <#initializer#>;
-}
-
-ImageTargets::TargetIterator ImageTargets::TargetIterator::operator++(const int amount) {
-    return ImageTargets::TargetIterator();
-}
 

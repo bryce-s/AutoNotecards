@@ -23,7 +23,6 @@ void ImageTargets::processArray(json &j) {
 }
 
 void ImageTargets::processJSON(const std::string jsonFilename) {
-
     std::ifstream inFile(jsonFilename);
     if (!inFile.is_open()) {
         std::cerr << "JSON file not found!\n";
@@ -47,22 +46,42 @@ PageVertex &ImageTargets::operator[](size_t index) {
 }
 
 void ImageTargets::push(const int pageNumber, const int xCoord, const int yCoord) {
-    PageVertex referenceVertex(pageNumber, xCoord, yCoord);
-    auto lb = std::lower_bound(vertices.begin(), vertices.end(), [](PageVertex& lhs, PageVertex& rhs){
+    PageVertex targetVertex(pageNumber, xCoord, yCoord);
+    auto lb = std::lower_bound(vertices.begin(), vertices.end(), targetVertex, [](auto& lhs, auto& rhs){
         if (lhs.pageNumber != rhs.pageNumber) {
             if (lhs.yCoord != rhs.yCoord) {
                 // at this point, we sort arbitrarily
-                return lhs.xCoord < rhs.xCoord;
-            } return lhs.yCoord < rhs.yCoord;
-        } return lhs.pageNumber < rhs.pageNumber;
+                return lhs.xCoord > rhs.xCoord;
+            } return lhs.yCoord > rhs.yCoord;
+        } return lhs.pageNumber > rhs.pageNumber;
     });
-    vertices.insert(lb, referenceVertex);
+    vertices.insert(lb, targetVertex);
 }
 
 PageVertex &ImageTargets::front() {
-    return vertices.front();
+    return this->vertices.front();
 }
 
 PageVertex &ImageTargets::back() {
-    return vertices.back();
+    return this->vertices.back();
 }
+
+std::vector<PageVertex>::iterator ImageTargets::begin() {
+    return this->vertices.begin();
+}
+
+std::vector<PageVertex>::iterator ImageTargets::end() {
+    return this->vertices.end();
+}
+
+void ImageTargets::print(std::ostream &out) {
+    for (size_t i{0}; i < vertices.size(); i++) {
+        out << "Vertex:      " << i << "\n";
+        out << "Page Number: " << vertices[i].pageNumber << "\n";
+        out << "xCoord:      " << vertices[i].xCoord << "\n";
+        out << "yCoord:      " << vertices[i].yCoord << "\n------\n";
+    }
+}
+
+
+
