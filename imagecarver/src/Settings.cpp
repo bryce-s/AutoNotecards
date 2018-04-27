@@ -8,3 +8,7 @@ Settings &Settings::Get() {
 std::string Settings::getSample() {
     return sample;
 }
+
+Settings::~Settings() {
+
+}

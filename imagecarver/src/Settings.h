@@ -10,9 +10,9 @@ public:
 
 private:
     std::string sample;
-    Settings() : sample("") {
+    Settings() : sample(""){};
 
-    }
+    ~Settings();
 
 public:
     std::string getSample();
