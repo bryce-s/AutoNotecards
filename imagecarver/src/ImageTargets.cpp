@@ -1,5 +1,6 @@
 #include "ImageTargets.h"
 
+
 void ImageTargets::processArray(json &j) {
     const int size = j["carvePosition"].size();
     for (size_t i{0}; i < size; i++) {
@@ -17,7 +18,7 @@ void ImageTargets::processArray(json &j) {
                 yCoord = it.value();
             }
         }
-        vertices.push_back(PageVertex(pageNumber, xCoord, yCoord));
+        push(pageNumber, xCoord, yCoord);
     }
 }
 
@@ -37,4 +38,23 @@ void ImageTargets::processJSON(const std::string jsonFilename) {
 
 }
 
+const size_t ImageTargets::size() {
+    return vertices.size();
+}
 
+PageVertex &ImageTargets::operator[](size_t index) {
+    return vertices[index];
+}
+
+void ImageTargets::push(const int pageNumber, const int xCoord, const int yCoord) {
+    PageVertex referenceVertex(pageNumber, xCoord, yCoord);
+    auto lb = std::lower_bound(vertices.begin(), vertices.end(), [](PageVertex& lhs, PageVertex& rhs){
+        if (lhs.pageNumber != rhs.pageNumber) {
+            if (lhs.yCoord != rhs.yCoord) {
+                // at this point, we sort arbitrarily
+                return lhs.xCoord < rhs.xCoord;
+            } return lhs.yCoord < rhs.yCoord;
+        } return lhs.pageNumber < rhs.pageNumber;
+    });
+    vertices.insert(lb, referenceVertex);
+}
