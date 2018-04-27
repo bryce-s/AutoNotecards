@@ -1,8 +1,10 @@
 #include <iostream>
 #include "src/Settings.h"
+#include "src/ImageTargets.h"
 
-
-int main() {
-    std::cout << Settings::Get().getSample();
+int main(int argc, char* argv[]) {
+    //std::cout << Settings::Get().getSample();
+    ImageTargets targets;
+    targets.processJSON("tests/test_in.json");
     return 0;
 }

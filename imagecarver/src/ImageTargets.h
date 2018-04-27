@@ -10,7 +10,11 @@
 using json = nlohmann::json ;
 
 class ImageTargets {
+
     std::vector<PageVertex> vertices;
+
+    void processArray(json& j);
+
 public:
     void processJSON(std::string jsonFilename);
 
