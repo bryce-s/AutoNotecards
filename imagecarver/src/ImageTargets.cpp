@@ -48,8 +48,8 @@ PageVertex &ImageTargets::operator[](size_t index) {
 void ImageTargets::push(const int pageNumber, const int xCoord, const int yCoord) {
     PageVertex targetVertex(pageNumber, xCoord, yCoord);
     auto lb = std::lower_bound(vertices.begin(), vertices.end(), targetVertex, [](auto& lhs, auto& rhs){
-        if (lhs.pageNumber != rhs.pageNumber) {
-            if (lhs.yCoord != rhs.yCoord) {
+        if (lhs.pageNumber == rhs.pageNumber) {
+            if (lhs.yCoord == rhs.yCoord) {
                 // at this point, we sort arbitrarily
                 return lhs.xCoord > rhs.xCoord;
             } return lhs.yCoord > rhs.yCoord;
