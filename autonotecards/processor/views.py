@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import PdfPack
 from django.core.files.storage import FileSystemStorage
-import logging
+from django import forms
+from .forms import NewPdfForm
 
 
 
@@ -14,14 +15,13 @@ def home(request):
 
 def new_pdf(request, pk):
     pack = get_object_or_404(PdfPack, pk=pk)
+    # get a gemeroc user for now:
+    user = User.objects.first()
     if request.method == 'POST':
-        desc = request.POST['desc']
-        divisions = request.POST['divs']
-        pdfFile = request.FILES['pdfFile']
-        user = User.objects.first()
-        fileSys = FileSystemStorage()
-        fileName = fileSys.save(pdfFile.name, pdfFile)
-        return render(request, 'new_pdf.html', {'uploadedFileUrl': fileSys.url(fileName)})
+        form = NewPdfForm(request.POST)
+        if form.is_valid():
+            pdfFile = form.save(commit=False)
         
+
 
     return render(request, 'new_pdf.html')
